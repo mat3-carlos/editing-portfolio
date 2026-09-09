@@ -1,0 +1,111 @@
+@import "tailwindcss";
+@import "@fontsource/geist-sans/400.css";
+@import "@fontsource/geist-sans/500.css";
+@import "@fontsource/geist-sans/600.css";
+@import "@fontsource/geist-sans/700.css";
+@import "@fontsource/geist-mono/400.css";
+@import "@fontsource/geist-mono/500.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f9fafb;
+  --foreground: #080c0f;
+  --card: #ffffff;
+  --card-foreground: #080c0f;
+  --popover: #ffffff;
+  --popover-foreground: #080c0f;
+  --primary: #0079b8;
+  --primary-foreground: #fcfcfc;
+  --secondary: #eff2f5;
+  --secondary-foreground: #12171a;
+  --muted: #e8ecee;
+  --muted-foreground: #4c575f;
+  --accent: #00a892;
+  --accent-foreground: #080c0f;
+  --destructive: #e40014;
+  --destructive-foreground: #e40014;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #a1a1a1;
+  --radius: 0.625rem;
+}
+
+.dark {
+  --background: #05070d;
+  --foreground: #ebeff5;
+  --card: #0a1018;
+  --card-foreground: #ebeff5;
+  --popover: #0a1018;
+  --popover-foreground: #ebeff5;
+  --primary: #00b0d6;
+  --primary-foreground: #05070d;
+  --secondary: #141b26;
+  --secondary-foreground: #dadee5;
+  --muted: #151b24;
+  --muted-foreground: #88909c;
+  --accent: #009683;
+  --accent-foreground: #ebeff5;
+  --destructive: #bb061e;
+  --destructive-foreground: #eeeeee;
+  --border: #222935;
+  --input: #151b24;
+  --ring: #00b0d6;
+}
+
+@theme inline {
+  --font-sans: "Geist Sans", "Geist Sans Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", "Geist Mono Fallback", ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

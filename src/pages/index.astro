@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+import VideoCard from "../components/VideoCard.astro";
+
+const projects = [
+  { title: "Fran Rodrigo — Reedit", category: "Reedit", videoSrc: "/videos/Reedit%20FranRodrigo.mp4" },
+  { title: "Marcos Mollá — Reedit", category: "Reedit", videoSrc: "/videos/Reedit%20Marcos%20Molla.mp4" },
+  { title: "Solazzo — Reedit", category: "Reedit", videoSrc: "/videos/Reedit%20Solazzo.mp4" },
+];
+---
+
+<Layout title="Carlos Mate — Edición de vídeo & Motion Graphics">
+  <main>
+    <!-- Reel: lo primero que se ve -->
+    <section id="reel" class="mx-auto max-w-6xl scroll-mt-20 px-6 pt-10 pb-16 sm:pt-14">
+      <div class="reveal aspect-video overflow-hidden rounded-xl border border-border bg-card">
+        <video
+          class="h-full w-full object-cover"
+          src="/videos/Reel%202026.mp4"
+          controls
+          playsinline
+          preload="metadata"
+        />
+      </div>
+    </section>
+
+    <!-- Hero -->
+    <section class="mx-auto max-w-6xl px-6 pb-20 sm:pb-28">
+      <p class="reveal font-mono text-xs tracking-wide text-accent uppercase">Video editing &amp; motion graphics</p>
+      <h1 class="reveal mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-balance sm:text-6xl" style="--reveal-delay: 100ms">
+        Vídeos que funcionan.
+      </h1>
+      <p class="reveal mt-6 max-w-xl text-base text-muted-foreground sm:text-lg" style="--reveal-delay: 180ms">
+        Trabajo edición narrativa, motion graphics y mucho más para marcas,
+        creadores y eventos. Aquí tienes una selección de proyectos recientes.
+      </p>
+      <div class="reveal mt-8 flex flex-wrap gap-3" style="--reveal-delay: 260ms">
+        <a
+          href="#proyectos"
+          class="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+        >
+          Ver proyectos
+        </a>
+        <a
+          href="#contacto"
+          class="rounded-md border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-ring"
+        >
+          Hablemos de tu proyecto
+        </a>
+      </div>
+    </section>
+
+    <!-- Grid de proyectos -->
+    <section id="proyectos" class="mx-auto max-w-6xl scroll-mt-20 px-6 pb-24">
+      <div class="reveal mb-10 flex items-end justify-between">
+        <h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Proyectos</h2>
+        <p class="font-mono text-xs text-muted-foreground uppercase">{projects.length} trabajos</p>
+      </div>
+      <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project, i) => (
+          <VideoCard title={project.title} category={project.category} videoSrc={project.videoSrc} delay={i * 100} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Sobre mí -->
+    <section id="sobre-mi" class="scroll-mt-20 border-t border-border bg-secondary/40">
+      <div class="mx-auto max-w-6xl px-6 py-20">
+        <p class="reveal font-mono text-xs tracking-wide text-accent uppercase">Sobre mí</p>
+        <h2 class="reveal mt-3 max-w-2xl text-2xl font-semibold tracking-tight text-balance sm:text-3xl" style="--reveal-delay: 80ms">
+          Edito para que la historia se sienta, no solo se vea.
+        </h2>
+        <p class="reveal mt-4 max-w-2xl text-muted-foreground" style="--reveal-delay: 160ms">
+          Combino storytelling con motion graphics para dar a cada proyecto
+          un acabado propio: ritmo, color y una identidad visual coherente de
+          principio a fin.
+        </p>
+        <div class="reveal mt-8 flex flex-wrap gap-2" style="--reveal-delay: 240ms">
+          {["Premiere Pro", "After Effects"].map((tool) => (
+            <span class="rounded-md border border-border bg-background px-3 py-1 font-mono text-xs text-muted-foreground">
+              {tool}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

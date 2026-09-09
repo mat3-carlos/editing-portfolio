@@ -1,0 +1,63 @@
+<div
+  id="lightbox"
+  class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-4 backdrop-blur-sm sm:p-10"
+>
+  <button
+    id="lightbox-close"
+    type="button"
+    aria-label="Cerrar"
+    class="absolute right-4 top-4 grid size-10 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 sm:right-8 sm:top-8"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-5">
+      <path d="M18 6 6 18M6 6l12 12" />
+    </svg>
+  </button>
+
+  <div class="w-full max-w-5xl">
+    <video id="lightbox-video" class="aspect-video w-full rounded-lg bg-black" controls playsinline></video>
+    <div class="mt-4">
+      <p id="lightbox-category" class="font-mono text-xs uppercase tracking-wide text-white/60"></p>
+      <h3 id="lightbox-title" class="text-lg font-medium text-white"></h3>
+    </div>
+  </div>
+</div>
+
+<script>
+  const lightbox = document.getElementById("lightbox") as HTMLDivElement;
+  const video = document.getElementById("lightbox-video") as HTMLVideoElement;
+  const titleEl = document.getElementById("lightbox-title") as HTMLElement;
+  const categoryEl = document.getElementById("lightbox-category") as HTMLElement;
+  const closeBtn = document.getElementById("lightbox-close") as HTMLButtonElement;
+
+  function openLightbox(src: string, title: string, category: string) {
+    video.src = src;
+    titleEl.textContent = title;
+    categoryEl.textContent = category;
+    lightbox.classList.remove("hidden");
+    lightbox.classList.add("flex");
+    document.body.style.overflow = "hidden";
+    video.play().catch(() => {});
+  }
+
+  function closeLightbox() {
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+    lightbox.classList.add("hidden");
+    lightbox.classList.remove("flex");
+    document.body.style.overflow = "";
+  }
+
+  window.addEventListener("open-lightbox", (e) => {
+    const { src, title, category } = (e as CustomEvent).detail;
+    if (src) openLightbox(src, title ?? "", category ?? "");
+  });
+
+  closeBtn.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !lightbox.classList.contains("hidden")) closeLightbox();
+  });
+</script>
