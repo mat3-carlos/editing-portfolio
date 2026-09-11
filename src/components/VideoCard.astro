@@ -37,10 +37,11 @@ const {
         class="h-full w-full object-cover"
         src={videoSrc}
         poster={poster}
+        autoplay
         muted
         loop
         playsinline
-        preload="metadata"
+        preload="auto"
       />
     ) : (
       <div class={`h-full w-full bg-gradient-to-br ${gradient}`} />
@@ -64,21 +65,14 @@ const {
 </article>
 
 <script>
-  // Autoplay the preview clip on hover, pause + rewind on leave.
-  // Click / Enter opens the full-size lightbox with sound.
+  // Preview clips autoplay on load. Click / Enter opens the full-size lightbox with sound.
   document.querySelectorAll<HTMLElement>(".video-card").forEach((card) => {
     const video = card.querySelector("video");
     if (!video) return;
 
     card.classList.add("cursor-pointer");
 
-    card.addEventListener("mouseenter", () => {
-      video.currentTime = 0;
-      video.play().catch(() => {});
-    });
-    card.addEventListener("mouseleave", () => {
-      video.pause();
-    });
+    video.play().catch(() => {});
 
     const open = () => {
       video.pause();
